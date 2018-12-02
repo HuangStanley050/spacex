@@ -38,10 +38,21 @@ const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     launches: {
-      types: new GraphQLList(LaunchType),
+      type: new GraphQLList(LaunchType),
       resolve(parent, args) {
         return axios
           .get("https://api.spacexdata.com/v3/launches")
+          .then(result => result.data);
+      }
+    },
+    launch: {
+      type: LaunchType,
+      args: {
+        flight_number: { type: GraphQLInt }
+      },
+      resolve(parent, args) {
+        return axios
+          .get(`https://api.spacexdata.com/v3/launches/${args.flight_number}`)
           .then(result => result.data);
       }
     }
