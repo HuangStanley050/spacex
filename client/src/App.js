@@ -6,6 +6,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { BrowserRouter, Route } from "react-router-dom";
 import Launches from "./components/launches";
+import Launch from "./components/launch";
 
 const client = new ApolloClient({
   uri: "https://webdevbootcamp-infamousgodhand.c9users.io:8081/graphql"
@@ -29,6 +30,7 @@ class App extends Component {
             />
             <h1 style={{ textAlign: "center", color: "red" }}>SpaceX App</h1>
             <Route exact path="/" component={Launches} />
+            <Route exact path="/launch/:flight_number" component={Launch} />
           </div>
         </BrowserRouter>
       </ApolloProvider>
