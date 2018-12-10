@@ -3,6 +3,17 @@ import classNames from "classnames";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 
+const mission_status = status => {
+  switch (status) {
+    case true:
+      return "text-success";
+    case false:
+      return "text-danger";
+    default:
+      return "text-warning";
+  }
+};
+
 const LaunchItem = ({
   launch: { flight_number, mission_name, launch_date_local, launch_success }
 }) => {
@@ -13,12 +24,7 @@ const LaunchItem = ({
         <div className="col-md-9">
           <h4>
             Mission:{" "}
-            <span
-              className={classNames({
-                "text-success": launch_success,
-                "text-danger": !launch_success
-              })}
-            >
+            <span className={mission_status(launch_success)}>
               {mission_name}
             </span>
           </h4>
